@@ -7,7 +7,6 @@ fi
 
 
 folder="/tmp"
-system_bit=`uname --m`
 
 
 cd /
@@ -52,31 +51,22 @@ sleep 2
 
 
 cd $folder
-if [ $system_bit == "x86_64" ]; then
-    tar xzf sh64.tar.gz
-    mv $folder/sh $HOME/bin
-    mv $folder/shfiles $HOME
-    mv updateconf.bash $HOME/bin/sh/
-    rm $folder/sh64.tar.gz
-else
-    tar xzf sh32.tar.gz
-    mv $folder/sh $HOME/bin
-    mv $folder/shfiles $HOME
-    mv updateconf.bash $HOME/bin/sh/
-    rm $folder/sh32.tar.gz
-fi
+
+tar xzf sh64.tar.gz
+mv $folder/sh $HOME/bin
+mv $folder/shfiles $HOME
+mv updateconf.bash $HOME/bin/sh/
+rm $folder/sh64.tar.gz
+
 
 
 ln -s $HOME/bin/sh/util/locsat $HOME/lcs
 
 
-cd $HOME/bin/sh
-
-
-echo "#change" >> updateconf.bash
+echo "#change" >> $HOME/bin/sh/updateconf.bash
 
 
 # source $HOME/.bashrc
 
 
-sleep 2
+# sleep 2

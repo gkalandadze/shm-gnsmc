@@ -9,34 +9,34 @@ crontab_command="@reboot docker start $container_name"
 # shm is chasartavi brdzanebis alias, bashrc shi chasamateblad
 docker_command="alias SHM='docker exec -it $container_name bash -i -c \"SHM\"'"
 
-
-wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
+# gadmoviwerot dockerisatvis sachiro secprofile rata chromma imushaos
+wget https://raw.githubusercontent.com/gkalandadze/shm-gnsmc/master/chrome.json -O ~/chrome.json
 
 
 # gadmoviwerot shm is image docker hub idan (hub.docker.com)
 docker pull gkalandadze/shm-gnsmc:latest
 
 if [ $? -eq 0 ]; then
-    echo "--------------------------------"
+    echo "-------------------------------------------------------"
     echo "warmatebit gadmoiwera shm image"
-    echo "--------------------------------"
+    echo "-------------------------------------------------------"
 else
-    echo "--------------------------------"
+    echo "---------------------------------------------"
     echo "ver gadmowera shm is image"
-    echo "--------------------------------"
+    echo "---------------------------------------------"
     exit
 fi
 
 
 # shevamowmot 250 tan tu gaqvt kavshiri
 if ping -q -c 1 -W 1 10.0.0.250 >/dev/null; then
-    echo "--------------------------------"
+    echo "--------------------------------------------------"
     echo "servertan kavshiri shesadzlebelia"
-    echo "--------------------------------"
+    echo "--------------------------------------------------"
 else
-    echo "--------------------------------"
+    echo "--------------------------------------------------------------------------------------------------------"
     echo "servertan kavshiri sheudzlebelia, sheamowme 10.0.0.250 tan kavshiri"
-    echo "--------------------------------"
+    echo "--------------------------------------------------------------------------------------------------------"
     exit
 fi
 
@@ -77,13 +77,13 @@ docker run -it -d --name $container_name -v data-250:/DATA \
     --cpuset-cpus 0 \
     --memory 512mb \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -e DISPLAY=unix$DISPLAY \
-    -v $HOME/Downloads:$HOME/Downloads \
+    -e DISPLAY \
+    -v $HOME/Downloads:$/home/sysop/Downloads \
     --security-opt seccomp=$HOME/chrome.json \
     --device /dev/snd \
     --device /dev/dri \
     -v /dev/shm:/dev/shm \
-    gkalandadze/shm-gnsmc:latest bash
+    gkalandadze/shm-gnsmc:latest bash --noprofile --norc
 
 
 # crontabshi chavamatot rom yovel chartvaze avtomaturad gaeshvas chveni sheqmnili containeri
